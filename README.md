@@ -16,6 +16,10 @@ Repositorio con código base para el desarrollo de una arquitectura hexagonal si
 - `cliente/dominio/fabricas.py`: crear objetos complejos del cominio de cliente. 
 - `cliente/dominio/excepciones.py`: Excepciones propias del dominio de cliente. Tablas en base de datos.
 
+- `cliente/aplicacion/dto.py`: Los DTOs de esta capa son JSON a los DTOs de esta capa. 
+- `cliente/aplicacion/mapeadores.py`: Clases para convertir de DTOs de esta capa a JSON y viceversa. 
+- `cliente/aplicacion/servicios.py`: Reune las operaciones CRUD, validaciones de reglas de negocio y persistencia en BD. Casi que un orquestador entre todos los componentes que ya hemos trabajado. 
+
 ## Arquitectura
 
 <img width="2746" height="450" alt="3" src="https://github.com/user-attachments/assets/14822685-fbe3-475f-a880-45c3ee3e74c9" />
@@ -96,6 +100,104 @@ Los siguientes JSON pueden ser usados para probar el API:
 - **Endpoint**: `/vuelos/reserva/{id}`
 - **Método**: `GET`
 - **Headers**: `Content-Type='aplication/json'`
+
+## Endpoints de Cliente
+
+Los siguientes endpoints están disponibles para gestión de clientes:
+
+### Crear Usuario
+
+- **Endpoint**: `/cliente/usuarios`
+- **Método**: `POST`
+- **Headers**: `Content-Type='application/json'`
+
+**Cliente Natural:**
+```json
+{
+    "tipo_usuario": "natural",
+    "nombre": "Juan Pérez",
+    "email": "juan.perez@example.com",
+    "cedula": "12345678",
+    "fecha_nacimiento": "1990-05-15T00:00:00Z",
+    "metodos_pago": [
+        {
+            "tipo": "CREDITO",
+            "nombre": "Tarjeta Principal",
+            "token_seguridad": "tok_123456789",
+            "datos_ofuscados": "****1234"
+        }
+    ]
+}
+```
+
+**Cliente Empresa:**
+```json
+{
+    "tipo_usuario": "empresa",
+    "nombre": "Empresa ABC S.A.S",
+    "email": "contacto@empresa-abc.com",
+    "rut": "900123456",
+    "fecha_constitucion": "2020-01-15T00:00:00Z",
+    "metodos_pago": [
+        {
+            "tipo": "DEBITO",
+            "nombre": "Cuenta Empresarial",
+            "token_seguridad": "tok_987654321",
+            "datos_ofuscados": "****5678"
+        }
+    ]
+}
+```
+
+### Obtener Usuario por ID
+
+- **Endpoint**: `/cliente/usuarios/{id}`
+- **Método**: `GET`
+- **Headers**: `Content-Type='application/json'`
+
+### Obtener Usuario por Email
+
+- **Endpoint**: `/cliente/usuarios/email/{email}`
+- **Método**: `GET`
+- **Headers**: `Content-Type='application/json'`
+
+### Obtener Todos los Usuarios
+
+- **Endpoint**: `/cliente/usuarios`
+- **Método**: `GET`
+- **Headers**: `Content-Type='application/json'`
+
+### Actualizar Usuario
+
+- **Endpoint**: `/cliente/usuarios/{id}`
+- **Método**: `PUT`
+- **Headers**: `Content-Type='application/json'`
+
+```json
+{
+    "nombre": "Juan Carlos Pérez",
+    "email": "juan.carlos@example.com",
+    "metodos_pago": [
+        {
+            "tipo": "CREDITO",
+            "nombre": "Nueva Tarjeta",
+            "token_seguridad": "tok_nuevo_123",
+            "datos_ofuscados": "****9999"
+        }
+    ]
+}
+```
+
+### Eliminar Usuario
+
+- **Endpoint**: `/cliente/usuarios/{id}`
+- **Método**: `DELETE`
+- **Headers**: `Content-Type='application/json'`
+
+### Health Check del Módulo Cliente
+
+- **Endpoint**: `/cliente/health`
+- **Método**: `GET`
 
 ## Ejecutar pruebas
 

@@ -15,11 +15,11 @@ from aeroalpes.seedwork.dominio.entidades import AgregacionRaiz
 
 @dataclass
 class MetodoPago(Entidad):  # Hereda de Entidad del seedwork
-    tipo: TipoPago
-    nombre: str  # Mutable
-    token_seguridad: TokenSeguridad
-    datos_ofuscados: DatosOfuscados
-    activo: bool = True  # Mutable
+    tipo: TipoPago = field(default_factory=TipoPago)
+    nombre: str = field(default="")  # Mutable
+    token_seguridad: TokenSeguridad = field(default_factory=TokenSeguridad)
+    datos_ofuscados: DatosOfuscados = field(default_factory=DatosOfuscados)
+    activo: bool = field(default=True)  # Mutable
 
     def cambiar_nombre(self, nuevo_nombre: str):
         # Lógica de negocio para cambiar nombre
@@ -30,7 +30,7 @@ class MetodoPago(Entidad):  # Hereda de Entidad del seedwork
         ...
 
 @dataclass
-class Usuario(Entidad, AgregacionRaiz):
+class Usuario(AgregacionRaiz):
     nombre: Nombre = field(default_factory=Nombre)
     email: Email = field(default_factory=Email)
     metodos_pago: list[MetodoPago] = field(default_factory=list)
