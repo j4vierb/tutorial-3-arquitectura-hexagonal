@@ -4,6 +4,17 @@
 
 Repositorio con código base para el desarrollo de una arquitectura hexagonal siguiendo los principios y patrones de DDD.
 
+## Revisar en detalle
+
+- `cliente/infraestructura/excepciones.py`: Excepciones de la capa de infraestructura para cliente. Fabrica y repositorio. 
+- `cliente/infraestructura/fabricas.py`: Crear objetos de cliente para la capa de infraestructura. 
+- `cliente/infraestructura/mapeadores.py`: Mapeadores capa de dominio del cliente
+- `cliente/infraestructura/repositorios.py`: Implementaciones de los repositorios de dominio. 
+- `cliente/infraestructura/dto.py`: DTOs (modelos anémicos) de la infraestructura de cliente. Un DTO en esta capa es un registro en la base de datos.
+
+
+- `cliente/dominio/fabricas.py`: crear objetos complejos del cominio de cliente. 
+- `cliente/dominio/excepciones.py`: Excepciones propias del dominio de cliente. Tablas en base de datos.
 
 ## Arquitectura
 
